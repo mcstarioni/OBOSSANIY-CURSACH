@@ -12,8 +12,11 @@ class BoxIns : public QGroupBox
     Q_OBJECT
 
 public:
-    explicit BoxIns(QWidget *parent = 0);
+    explicit BoxIns(int index,QWidget *parent = 0);
+    int index;
     ~BoxIns();
+public slots:
+    void createIns();
 
 private:
     Ui::BoxIns *ui;

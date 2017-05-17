@@ -1,22 +1,33 @@
-#ifndef MAINFORM_H
-#define MAINFORM_H
-
+#ifndef MainForm_H
+#define MainForm_H
 #include <QWidget>
-
+#include <QPushButton>
+#include "addition.h"
 namespace Ui {
 class MainForm;
 }
 
-class MainForm : public QWidget
+class MainForm: public QWidget
 {
     Q_OBJECT
 
+private:
+    Ui::MainForm* ui;
+    QWidget *widgetLast;
+    Addition* addition;
+    //QVector<QWidget*>* vectorW;
+    QPushButton *last;
 public:
+
     explicit MainForm(QWidget *parent = 0);
     ~MainForm();
-
-private:
-    Ui::MainForm *ui;
+public slots:
+private slots:
+    void on_inclusionB_clicked();
+    void on_addB_clicked();
+    void on_removeB_clicked();
+    void on_searchB_clicked();
+    void on_changeB_clicked();
 };
 
-#endif // MAINFORM_H
+#endif // MainForm_H

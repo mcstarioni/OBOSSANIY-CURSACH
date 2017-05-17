@@ -14,7 +14,14 @@ class CheckableForm : public QWidget
 public:
     explicit CheckableForm(QWidget *parent = 0);
     ~CheckableForm();
-
+    bool isChecked;
+    QWidget* widget;
+    void setWidget(QWidget* w);
+private slots:
+    void on_radioButton_toggled(bool checked);
+public slots:
+    void changeButton();
+    void changeEnabled();
 private:
     Ui::CheckableForm *ui;
 };

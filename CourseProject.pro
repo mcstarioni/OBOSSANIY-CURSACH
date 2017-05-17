@@ -24,12 +24,48 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
     instruments.cpp \
-    manager.cpp
+    manager.cpp \
+    database.cpp \
+    boxins.cpp \
+    mainform.cpp \
+    drum.cpp \
+    plates.cpp \
+    violin.cpp \
+    group.cpp \
+    eguitar.cpp \
+    synth.cpp \
+    organ.cpp \
+    groupform.cpp \
+    checkableform.cpp \
+    addition.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
     instruments.h \
-    manager.h
+    manager.h \
+    database.h \
+    boxins.h \
+    mainform.h \
+    drum.h \
+    plates.h \
+    violin.h \
+    group.h \
+    eguitar.h \
+    synth.h \
+    organ.h \
+    groupform.h \
+    checkableform.h \
+    addition.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    mainform.ui \
+    boxins.ui \
+    drum.ui \
+    plates.ui \
+    violin.ui \
+    eguitar.ui \
+    synth.ui \
+    organ.ui \
+    groupform.ui \
+    checkableform.ui \
+    addition.ui
