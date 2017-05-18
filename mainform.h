@@ -3,6 +3,8 @@
 #include <QWidget>
 #include <QPushButton>
 #include "addition.h"
+#include "inclusion.h"
+#include "checkableform.h"
 namespace Ui {
 class MainForm;
 }
@@ -14,8 +16,11 @@ class MainForm: public QWidget
 private:
     Ui::MainForm* ui;
     QWidget *widgetLast;
+    int actionType;
     Addition* addition;
-    //QVector<QWidget*>* vectorW;
+    Inclusion* inclusion;
+    QVector<CheckableForm*>* vectorW;
+    QVector<CheckableForm*>* vectorG;
     QPushButton *last;
 public:
 
@@ -28,6 +33,10 @@ private slots:
     void on_removeB_clicked();
     void on_searchB_clicked();
     void on_changeB_clicked();
+    void toSimpleView();
+    void on_addB_toggled(bool checked);
+    void on_additionComplete(CheckableForm* form, int type);
+    void setSelectable(bool);
 };
 
 #endif // MainForm_H

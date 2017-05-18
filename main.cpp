@@ -24,6 +24,14 @@ int main(int argc, char *argv[])
     //Manager* manager2 = Manager::getInstance();
     MainForm form;
     form.show();
-    //qDebug()<<Manager::n;
+    Drums *drum = new Drums();
+    QVector<Drums*>* drums = new QVector<Drums*>();
+    drums->push_back(drum);
+    QVector<Instruments*>* ins= (QVector<Instruments*>*)drums;
+    qDebug()<<ins->at(0)->Id();
+    delete drum;
+    drum = 0;
+    delete drum;
+    delete ins;
     return a.exec();
 }

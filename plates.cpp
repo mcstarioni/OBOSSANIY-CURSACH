@@ -12,3 +12,13 @@ Plates::~Plates()
 {
     delete ui;
 }
+
+void Plates::on_spinBox_valueChanged(int arg1)
+{
+    bpm = arg1;
+}
+
+void Plates::on_diamTitle_valueChanged(int arg1)
+{
+    diameter = arg1;
+}

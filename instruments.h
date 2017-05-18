@@ -4,15 +4,13 @@
 #include <QDebug>
 #include <QVector>
 #include "group.h"
-enum Bow{mass,orchestral,solo,artistic};
-enum Pickup{pzelectric,electromagneic};
-
 
 class Group;
 class Instruments
 {
 
 private:
+    int type;
     int id;
     static int instrumentsCount;
     static int lastId;
@@ -20,7 +18,9 @@ private:
     int averageFrequency;
     QVector<Group*> *groups;
 public:
-    Instruments(int arg);
+    int Type();
+    int Id();
+    Instruments(int arg,int type);
     void setName(QString name);
     QString getName();
     void setFrequency(int arg);
@@ -35,7 +35,7 @@ class Drumming:public Instruments
 private:
     int beatPerMinute;
 public:
-    Drumming(int bpm,int freq):Instruments(freq),beatPerMinute(bpm) {qDebug()<<"Drumming";}
+    Drumming(int bpm,int freq, int type):Instruments(freq, type),beatPerMinute(bpm) {qDebug()<<"Drumming";}
     int getBPM();
     void setBPM(int bpm);
     virtual bool hasMembrane() = 0;
@@ -46,7 +46,7 @@ private:
     const bool open;
     static const bool membrane;
 public:
-    Drums(bool o = true):Drumming(170,5000),open(o){qDebug()<<"Drums";}
+    Drums(bool o = true):Drumming(170,5000,0),open(o){qDebug()<<"Drums";}
     bool isOpen();
     bool hasMembrane();
     ~Drums();
@@ -57,7 +57,7 @@ private:
     const int diameter;
     static const bool membrane;
 public:
-    Plate(int d = 20):Drumming(120,8000),diameter(d){qDebug()<<"Plates";}
+    Plate(int d = 20):Drumming(120,8000,1),diameter(d){qDebug()<<"Plates";}
     int getDiameter();
     bool hasMembrane();
     ~Plate();
@@ -69,7 +69,7 @@ private:
 protected:
     static const bool potentiometer;
 public:
-    Stringed(int strings,int freq):Instruments(freq),stringsCount(strings){}
+    Stringed(int strings,int freq, int type):Instruments(freq,type),stringsCount(strings){}
     int getStrings();
     void setStrings(int strings);
     virtual bool hasPotentiometer() = 0;
@@ -77,24 +77,24 @@ public:
 class Violins:public Stringed
 {
 private:
-    Bow* bow;
+    int bow;
     static const bool potentiometer;
 public:
-    Violins(Bow* b = new Bow(mass)):Stringed(4,10000),bow(b){}
-    Bow* getBow();
-    void setBow(Bow* bow);
+    Violins(int b = 0):Stringed(4,10000,1),bow(b){}
+    int getBow();
+    void setBow(int b);
     bool hasPotentiometer();
     ~Violins();
 };
 class EGuitars:public Stringed
 {
 private:
-    Pickup* pickup;
+    int pickup;
     static const bool potentiometer;
 public:
-    EGuitars(Pickup* p = new Pickup(pzelectric)):Stringed(8,9000),pickup(p){}
-    Pickup* getPickup();
-    void setPickup(Pickup* p);
+    EGuitars(int p = 0):Stringed(8,9000,3),pickup(p){}
+    int getPickup();
+    void setPickup(int p);
     bool hasPotentiometer();
     ~EGuitars();
 
@@ -106,7 +106,7 @@ private:
 protected:
     static const bool thumbler;
 public:
-    KeyBoarded(int keys,int freq):Instruments(freq),keysCount(keys){}
+    KeyBoarded(int keys,int freq, int type):Instruments(freq,type),keysCount(keys){}
     int getKeys();
     void setKeys(int keys);
 };
@@ -115,7 +115,7 @@ class Synths:public KeyBoarded
 private:
     int voiceCount;
 public:
-    Synths(int vc = 10):KeyBoarded(35,18000),voiceCount(vc){}
+    Synths(int vc = 10):KeyBoarded(35,18000,4),voiceCount(vc){}
     int getVoiceCount();
     void setVoiceCount(int voiceCount);
     ~Synths();
@@ -125,7 +125,7 @@ class Organs:public KeyBoarded
 private:
     int pipesCount;
 public:
-    Organs(int pipes = 49):KeyBoarded(49,180000),pipesCount(pipes){}
+    Organs(int pipes = 49):KeyBoarded(49,180000,5),pipesCount(pipes){}
     int getPipes();
     void setPipes(int pipes);
     ~Organs();

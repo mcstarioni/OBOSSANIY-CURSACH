@@ -15,13 +15,17 @@ public:
     explicit CheckableForm(QWidget *parent = 0);
     ~CheckableForm();
     bool isChecked;
+    bool isInstrument;
+    int id;
     QWidget* widget;
     void setWidget(QWidget* w);
 private slots:
     void on_radioButton_toggled(bool checked);
 public slots:
-    void changeButton();
-    void changeEnabled();
+    void setButton(bool);
+    void setEnabled(bool);
+signals:
+    void toggled(bool status);
 private:
     Ui::CheckableForm *ui;
 };

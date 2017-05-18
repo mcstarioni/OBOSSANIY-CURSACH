@@ -12,3 +12,13 @@ Violin::~Violin()
 {
     delete ui;
 }
+
+void Violin::on_spinBox_valueChanged(int arg1)
+{
+    strings = arg1;
+}
+
+void Violin::on_comboBox_currentIndexChanged(int index)
+{
+    bow = index;
+}

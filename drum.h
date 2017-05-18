@@ -14,9 +14,12 @@ class Drum : public QWidget
 public:
     explicit Drum(QWidget *parent = 0);
     ~Drum();
-
-private:
+    bool isOpen;
+    int bpm;
     Ui::Drum *ui;
+private slots:
+    void on_bpm_valueChanged(int arg1);
+    void on_radioButton_toggled(bool checked);
 };
 
 #endif // DRUM_H

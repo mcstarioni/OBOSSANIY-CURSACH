@@ -13,7 +13,14 @@ class Plates : public QWidget
 
 public:
     explicit Plates(QWidget *parent = 0);
+    int bpm;
+    int diameter;
     ~Plates();
+
+private slots:
+    void on_spinBox_valueChanged(int arg1);
+
+    void on_diamTitle_valueChanged(int arg1);
 
 private:
     Ui::Plates *ui;

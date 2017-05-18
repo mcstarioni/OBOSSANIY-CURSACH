@@ -12,3 +12,13 @@ Drum::~Drum()
 {
     delete ui;
 }
+
+void Drum::on_bpm_valueChanged(int arg1)
+{
+    bpm = arg1;
+}
+
+void Drum::on_radioButton_toggled(bool checked)
+{
+    isOpen = checked;
+}

@@ -8,9 +8,13 @@ class Instruments;
 class Group
 {
 private:
+    int id;
+    static int groupCount;
+    static int lastId;
     QString name;
     QVector<Instruments*> *orchestra;
 public:
+    int Id();
     void setName(QString n);
     QString getName();
     void addInstrument(Instruments *i);

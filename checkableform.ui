@@ -39,7 +39,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QWidget" name="widget" native="true"/>
+    <layout class="QHBoxLayout" name="toShow"/>
    </item>
   </layout>
  </widget>

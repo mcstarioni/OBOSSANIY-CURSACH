@@ -4,8 +4,9 @@
 
 int Instruments::instrumentsCount = 0;
 int Instruments::lastId = 0;
-Instruments::Instruments(int freq)
+Instruments::Instruments(int freq,int type)
 {
+    this->type = type;
     this->averageFrequency = freq;
     this->id = Instruments::lastId++;
     Instruments::instrumentsCount++;
@@ -31,6 +32,8 @@ void Instruments::addGroup(Group *b){
     if(!groups->contains(b))
         this->groups->push_back(b);}
 void Instruments::removeGroup(Group *b){this->groups->removeOne(b);}
+int Instruments::Id(){return this->id;}
+int Instruments::Type(){return type;}
 
 int Drumming::getBPM(){return this->beatPerMinute;}
 void Drumming::setBPM(int bpm){this->beatPerMinute = bpm;}
@@ -49,14 +52,14 @@ int Stringed::getStrings(){return this->stringsCount;}
 void Stringed::setStrings(int strings){this->stringsCount = strings;}
 
 const bool Violins::potentiometer = false;
-Bow* Violins::getBow(){return this->bow;}
-void Violins::setBow(Bow *bow){this->bow = bow;}
+int Violins::getBow(){return this->bow;}
+void Violins::setBow(int bow){this->bow = bow;}
 bool Violins::hasPotentiometer(){return this->potentiometer;}
 Violins::~Violins(){}
 
 const bool EGuitars::potentiometer = true;
-Pickup* EGuitars::getPickup(){return this->pickup;}
-void EGuitars::setPickup(Pickup *p){this->pickup = p;}
+int EGuitars::getPickup(){return this->pickup;}
+void EGuitars::setPickup(int p){this->pickup = p;}
 bool EGuitars::hasPotentiometer(){return this->potentiometer;}
 EGuitars::~EGuitars(){}
 
@@ -65,8 +68,10 @@ void KeyBoarded::setKeys(int keys){this->keysCount = keys;}
 
 int Synths::getVoiceCount(){return this->voiceCount;}
 void Synths::setVoiceCount(int voiceCount){this->voiceCount = voiceCount;}
+Synths::~Synths(){}
 
 int Organs::getPipes(){return this->pipesCount;}
 void Organs::setPipes(int pipes){this->pipesCount = pipes;}
+Organs::~Organs(){}
 
 

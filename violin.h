@@ -13,7 +13,14 @@ class Violin : public QWidget
 
 public:
     explicit Violin(QWidget *parent = 0);
+    int bow;
+    int strings;
     ~Violin();
+
+private slots:
+    void on_spinBox_valueChanged(int arg1);
+
+    void on_comboBox_currentIndexChanged(int index);
 
 private:
     Ui::Violin *ui;

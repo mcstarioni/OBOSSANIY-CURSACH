@@ -6,9 +6,20 @@ EGuitar::EGuitar(QWidget *parent) :
     ui(new Ui::EGuitar)
 {
     ui->setupUi(this);
+
 }
 
 EGuitar::~EGuitar()
 {
     delete ui;
+}
+
+void EGuitar::on_spinBox_valueChanged(int arg1)
+{
+    strings = arg1;
+}
+
+void EGuitar::on_comboBox_currentIndexChanged(int index)
+{
+    pickup = index;
 }

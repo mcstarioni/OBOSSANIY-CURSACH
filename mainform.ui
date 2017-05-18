@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>419</width>
-    <height>300</height>
+    <width>543</width>
+    <height>291</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,13 +90,26 @@
        </property>
       </widget>
      </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="actionLayout"/>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="scrollAreas">
      <item>
       <widget class="QScrollArea" name="scrollArea">
        <property name="widgetResizable">
@@ -107,10 +120,11 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>195</width>
-          <height>239</height>
+          <width>257</width>
+          <height>230</height>
          </rect>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2"/>
        </widget>
       </widget>
      </item>
@@ -119,15 +133,16 @@
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollAreaWidgetContents_2">
+       <widget class="QWidget" name="scrollG">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>194</width>
-          <height>239</height>
+          <width>256</width>
+          <height>230</height>
          </rect>
         </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3"/>
        </widget>
       </widget>
      </item>

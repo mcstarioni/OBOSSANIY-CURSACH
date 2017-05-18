@@ -12,3 +12,13 @@ Synth::~Synth()
 {
     delete ui;
 }
+
+void Synth::on_keysCount_valueChanged(int arg1)
+{
+    keys = arg1;
+}
+
+void Synth::on_spinBox_2_valueChanged(int arg1)
+{
+    voices = arg1;
+}

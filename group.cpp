@@ -1,7 +1,11 @@
 #include "group.h"
 
+int Group::groupCount = 0;
+int Group::lastId = 0;
 Group::Group()
 {
+    id = Group::lastId++;
+    Group::groupCount++;
 }
 void Group::addInstrument(Instruments *i)
 {
@@ -29,8 +33,10 @@ QString Group::getName()
 }
 Group::~Group()
 {
+    Group::groupCount--;
     for(int i = 0; i < orchestra->size(); i++)
     {
         orchestra->at(i)->removeGroup(this);
     }
 }
+int Group::Id(){return id;}

@@ -24,14 +24,18 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="bpmEdit"/>
+      <widget class="QSpinBox" name="bpm">
+       <property name="bpm" stdset="0">
+        <number>0</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
    <item>
     <widget class="QRadioButton" name="radioButton">
      <property name="text">
-      <string>Есть мембрана</string>
+      <string>Открытый</string>
      </property>
     </widget>
    </item>

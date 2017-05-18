@@ -1,6 +1,6 @@
 #ifndef ADDITION_H
 #define ADDITION_H
-
+#include "checkableform.h"
 #include <QWidget>
 #include "boxins.h"
 #include "groupform.h"
@@ -23,6 +23,16 @@ private slots:
     void on_createIns_toggled(bool checked);
 
     void on_createGroup_toggled(bool checked);
+
+    void on_comboBox_currentIndexChanged(int index);
+
+    void on_cancel_clicked();
+
+    void on_accept_clicked();
+
+signals:
+    void cancel();
+    void additionComplete(CheckableForm *form, int type);
 
 private:
     Ui::Addition *ui;

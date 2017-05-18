@@ -14,32 +14,24 @@ CheckableForm::~CheckableForm()
 }
 void CheckableForm::setWidget(QWidget *w)
 {
-    ui->widget = w;
+    widget = w;
+    ui->toShow->addWidget(w);
 }
 
 void CheckableForm::on_radioButton_toggled(bool checked)
 {
+    void toggled(bool status);
     isChecked = checked;
 }
-void CheckableForm::changeButton()
+void CheckableForm::setButton(bool shown)
 {
-    if(ui->radioButton->isHidden())
-    {
+    if(shown)
         ui->radioButton->show();
-    }
     else
-    {
         ui->radioButton->hide();
-    }
 }
-void CheckableForm::changeEnabled()
+
+void CheckableForm::setEnabled(bool status)
 {
-    if(ui->widget->isEnabled())
-    {
-        ui->widget->setEnabled(false);
-    }
-    else
-    {
-        ui->widget->setEnabled(true);
-    }
+    widget->setEnabled(status);
 }
