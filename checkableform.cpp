@@ -45,11 +45,11 @@ void CheckableForm::updateInclusions()
 {
     if(isInstrument)
     {
-        qDebug()<<"updated 2";
+        //qDebug()<<"updated 2";
         ((BoxIns*)widget)->updateIncl();
     }else
     {
-        qDebug()<<"updated 2";
+        //qDebug()<<"updated 2";
         ((GroupForm*)widget)->updateIncl();
     }
 }

@@ -130,10 +130,10 @@ void BoxIns::addGroup(QString group)
 }
 void BoxIns::updateIncl()
 {
-    qDebug()<<"updated 3";
     ui->groups->clear();
     Instruments* ins = manager->getById(id);
     QVector<Group*>* vec = ins->getGroups();
+    qDebug()<<ins->getName()<<" "<<vec->size();
     for(int i = 0; i < vec->size(); i++)
     {
         QString str = QString::number(vec->at(i)->Id());

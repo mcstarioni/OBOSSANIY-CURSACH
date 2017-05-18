@@ -45,7 +45,8 @@ MainForm::~MainForm()
 }
 void MainForm::on_inclusionB_clicked()
 {
-
+    toggledG->clear();
+    toggledW->clear();
     last->setChecked(false);
     ui->inclusionB->setChecked(true);
     widgetLast->hide();
@@ -70,7 +71,8 @@ void MainForm::on_addB_clicked()
 
 void MainForm::on_removeB_clicked()
 {
-
+    toggledG->clear();
+    toggledW->clear();
     last->setChecked(false);
     ui->removeB->setChecked(true);
     widgetLast->hide();
@@ -148,16 +150,14 @@ void MainForm::on_inclusionComplete()
     }
     for(int i = 0; i < toggledG->size(); i++)
     {
-        qDebug()<<"updated";
+        //qDebug()<<"updated";
         toggledG->at(i)->updateInclusions();
     }
     for(int j = 0; j < toggledW->size(); j++)
     {
-        qDebug()<<"updated";
+        //qDebug()<<"updated";
         toggledW->at(j)->updateInclusions();
     }
-    toggledG->clear();
-    toggledW->clear();
     toSimpleView();
 }
 

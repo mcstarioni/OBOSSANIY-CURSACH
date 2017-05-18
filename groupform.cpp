@@ -25,10 +25,10 @@ void GroupForm::createdGroup(int index)
 }
 void GroupForm::updateIncl()
 {
-    qDebug()<<"updated 3";
     ui->listWidget->clear();
     Group *group = Manager::getInstance()->getByIdG(id);
     QVector<Instruments*>* vec = group->getInstruments();
+    qDebug()<<group->getName()<<" "<<vec->size();
     for(int i = 0; i < vec->size(); i++)
     {
         QString str = QString::number(vec->at(i)->Id());

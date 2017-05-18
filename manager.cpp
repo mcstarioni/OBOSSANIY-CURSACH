@@ -7,7 +7,6 @@ Manager::Manager(QObject *parent):
 {
     qDebug()<<"manager created";
     database = Database::getInstance();
-    qDebug()<<"manager created";
 
 }
 Manager::~Manager()
@@ -15,18 +14,14 @@ Manager::~Manager()
 }
 Instruments* Manager::getById(int id)
 {
-    qDebug()<<"I 1";
     Instruments *ins;
     for(int i = 0; i < database->vectorAll->size(); i++)
     {
-        qDebug()<<"I 2";
         for(int j = 0; j < database->vectorAll->at(i)->size(); j++)
         {
-            qDebug()<<"I 3";
             ins = database->vectorAll->at(i)->at(j);
             if(ins->Id() == id)
             {
-                qDebug()<<"found 4"<<id;
                 return ins;
             }
         }
@@ -36,14 +31,11 @@ Instruments* Manager::getById(int id)
 Group* Manager::getByIdG(int id)
 {
     Group *g;
-    qDebug()<<"G 1";
     for(int i = 0; i < database->vectorGroup->size(); i++)
     {
-        qDebug()<<"G 2";
         g = database->vectorGroup->at(i);
         if(g->Id() == id)
         {
-            qDebug()<<"found 3";
             return g;
         }
     }
@@ -52,26 +44,17 @@ Group* Manager::getByIdG(int id)
 
 void Manager::includeIns(Instruments* ins, Group* group)
 {
-    qDebug()<<"include 1 1";
     ins->addGroup(group);
-    qDebug()<<"include 1 2";
     group->addInstrument(ins);
-    qDebug()<<"include 1 2";
-
-
 }
 
 void Manager::includeIns(int idIns, int idGroup)
 {
-    qDebug()<<idIns<<" "<<idGroup;
     Instruments *ins = getById(idIns);
     Group *g = getByIdG(idGroup);
     if(ins != 0 && g != 0)
     {
-        qDebug()<<"include 1";
         includeIns(ins,g);
-        qDebug()<<"include 2";
-
     }
 }
 void Manager::removeInstrument(Instruments* ins)
@@ -129,7 +112,6 @@ void Manager::createDrum(int af, QString name, int bpm,bool open)
     Drums* drum = new Drums(open);
     setDrum(drum->Id(),af,name,bpm,open,drum);
     database->vectorDrums->push_back(drum);
-    qDebug()<<"drum creation";
     emit createdIns(drum->Id());
 }
 
@@ -175,7 +157,6 @@ void Manager::createOrgan(int af, QString name,int keys, int pipes)
 
 void Manager::setDrum(int id, int af, QString name, int bpm,bool open,Instruments *ins)
 {
-    qDebug()<<"drum set 1";
     Drums *drum;
     if(ins != 0)
     {
@@ -190,7 +171,6 @@ void Manager::setDrum(int id, int af, QString name, int bpm,bool open,Instrument
         drum->setName(name);
         drum->setBPM(bpm);
     }
-    qDebug()<<"drum set 2";
 }
 
 void Manager::setPlate(int id,int af, QString name, int bpm,int diameter,Instruments *ins)
