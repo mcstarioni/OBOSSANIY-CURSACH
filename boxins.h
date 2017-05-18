@@ -23,6 +23,7 @@ public slots:
     void classChanged(int i);
     void objectCreated(int id);
     void addGroup(QString group);
+    void updateIncl();
 private:
     Ui::BoxIns *ui;
     Manager* manager;

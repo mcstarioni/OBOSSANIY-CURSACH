@@ -34,6 +34,27 @@ void Instruments::addGroup(Group *b){
 void Instruments::removeGroup(Group *b){this->groups->removeOne(b);}
 int Instruments::Id(){return this->id;}
 int Instruments::Type(){return type;}
+QVector<Group*>* Instruments::getGroups(){return groups;}
+QString Instruments::getTypeName()
+{
+    switch(type)
+    {
+    case 0:
+        return "Drum";
+    case 1:
+        return "Plate";
+    case 2:
+        return "Violin";
+    case 3:
+        return "EGuitar";
+    case 4:
+        return "Synth";
+    case 5:
+        return "Organ";
+    default:
+        return "WTF?";
+    }
+}
 
 int Drumming::getBPM(){return this->beatPerMinute;}
 void Drumming::setBPM(int bpm){this->beatPerMinute = bpm;}

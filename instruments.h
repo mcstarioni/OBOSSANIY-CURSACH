@@ -27,8 +27,10 @@ public:
     int getFrequency();
     static int getInstrumentsCount();
     virtual ~Instruments() = 0;
+    QVector<Group*>* getGroups();
     void addGroup(Group *b);
     void removeGroup(Group *b);
+    QString getTypeName();
 };
 class Drumming:public Instruments
 {

@@ -128,3 +128,18 @@ void BoxIns::addGroup(QString group)
 {
     this->ui->groups->addItem(group);
 }
+void BoxIns::updateIncl()
+{
+    qDebug()<<"updated 3";
+    ui->groups->clear();
+    Instruments* ins = manager->getById(id);
+    QVector<Group*>* vec = ins->getGroups();
+    for(int i = 0; i < vec->size(); i++)
+    {
+        QString str = QString::number(vec->at(i)->Id());
+        str = "id: " + str + ", name: " + vec->at(i)->getName();
+        qDebug()<<str;
+        ui->groups->addItem(str);
+    }
+}
+

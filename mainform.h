@@ -4,6 +4,7 @@
 #include <QPushButton>
 #include "addition.h"
 #include "inclusion.h"
+#include "removal.h"
 #include "checkableform.h"
 namespace Ui {
 class MainForm;
@@ -19,6 +20,9 @@ private:
     int actionType;
     Addition* addition;
     Inclusion* inclusion;
+    removal* remove;
+    QVector<CheckableForm*>* toggledW;
+    QVector<CheckableForm*>* toggledG;
     QVector<CheckableForm*>* vectorW;
     QVector<CheckableForm*>* vectorG;
     QPushButton *last;
@@ -36,7 +40,11 @@ private slots:
     void toSimpleView();
     void on_addB_toggled(bool checked);
     void on_additionComplete(CheckableForm* form, int type);
+    void on_inclusionComplete();
+    void on_removalComplete();
     void setSelectable(bool);
+    void formToggled(bool toggled);
+    void on_pushButton_clicked();
 };
 
 #endif // MainForm_H

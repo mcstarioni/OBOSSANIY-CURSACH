@@ -1,11 +1,12 @@
 #include "group.h"
-
+#include <QVector>
 int Group::groupCount = 0;
 int Group::lastId = 0;
 Group::Group()
 {
     id = Group::lastId++;
     Group::groupCount++;
+    orchestra = new QVector<Instruments*>();
 }
 void Group::addInstrument(Instruments *i)
 {

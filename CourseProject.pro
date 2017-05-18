@@ -39,7 +39,8 @@ SOURCES += main.cpp\
     groupform.cpp \
     checkableform.cpp \
     addition.cpp \
-    inclusion.cpp
+    inclusion.cpp \
+    removal.cpp
 
 HEADERS  += \
     instruments.h \
@@ -57,7 +58,8 @@ HEADERS  += \
     groupform.h \
     checkableform.h \
     addition.h \
-    inclusion.h
+    inclusion.h \
+    removal.h
 
 FORMS    += \
     mainform.ui \
@@ -71,4 +73,5 @@ FORMS    += \
     groupform.ui \
     checkableform.ui \
     addition.ui \
-    inclusion.ui
+    inclusion.ui \
+    removal.ui

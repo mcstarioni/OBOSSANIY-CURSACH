@@ -74,6 +74,7 @@ void Addition::on_cancel_clicked()
 
 void Addition::on_accept_clicked()
 {
+
     qDebug()<<"inAccept 1";
     int type = 1;
     CheckableForm *form = new CheckableForm();
@@ -94,10 +95,13 @@ void Addition::on_accept_clicked()
         {
             groupform->createGroup();
             form->setWidget(groupform);
-            form->id = groupform->index;
+            form->id = groupform->id;
             form->isInstrument = false;
             groupform = 0;
             type = 2;
+        }else
+        {
+            return;
         }
     }
     form->setEnabled(false);

@@ -15,14 +15,18 @@ Manager::~Manager()
 }
 Instruments* Manager::getById(int id)
 {
+    qDebug()<<"I 1";
     Instruments *ins;
     for(int i = 0; i < database->vectorAll->size(); i++)
     {
+        qDebug()<<"I 2";
         for(int j = 0; j < database->vectorAll->at(i)->size(); j++)
         {
+            qDebug()<<"I 3";
             ins = database->vectorAll->at(i)->at(j);
             if(ins->Id() == id)
             {
+                qDebug()<<"found 4"<<id;
                 return ins;
             }
         }
@@ -32,11 +36,14 @@ Instruments* Manager::getById(int id)
 Group* Manager::getByIdG(int id)
 {
     Group *g;
+    qDebug()<<"G 1";
     for(int i = 0; i < database->vectorGroup->size(); i++)
     {
+        qDebug()<<"G 2";
         g = database->vectorGroup->at(i);
         if(g->Id() == id)
         {
+            qDebug()<<"found 3";
             return g;
         }
     }
@@ -45,15 +52,68 @@ Group* Manager::getByIdG(int id)
 
 void Manager::includeIns(Instruments* ins, Group* group)
 {
+    qDebug()<<"include 1 1";
     ins->addGroup(group);
+    qDebug()<<"include 1 2";
     group->addInstrument(ins);
+    qDebug()<<"include 1 2";
+
+
 }
 
 void Manager::includeIns(int idIns, int idGroup)
 {
+    qDebug()<<idIns<<" "<<idGroup;
     Instruments *ins = getById(idIns);
     Group *g = getByIdG(idGroup);
-    includeIns(ins,g);
+    if(ins != 0 && g != 0)
+    {
+        qDebug()<<"include 1";
+        includeIns(ins,g);
+        qDebug()<<"include 2";
+
+    }
+}
+void Manager::removeInstrument(Instruments* ins)
+{
+   switch(ins->Type())
+   {
+   case 0:
+       database->vectorDrums->removeOne((Drums*)ins);
+       break;
+   case 1:
+       database->vectorPlates->removeOne((Plate*)ins);
+       break;
+   case 2:
+       database->vectorViolins->removeOne((Violins*)ins);
+       break;
+   case 3:
+       database->vectorGuitars->removeOne((EGuitars*)ins);
+       break;
+   case 4:
+       database->vectorSynths->removeOne((Synths*)ins);
+       break;
+   case 5:
+       database->vectorOrgans->removeOne((Organs*)ins);
+       break;
+   default:
+       return;
+   }
+}
+
+void Manager::removeGroup(Group *gr)
+{
+    database->vectorGroup->removeOne(gr);
+}
+
+void Manager::removeInstrument(int idIns)
+{
+    removeInstrument(getById(idIns));
+}
+
+void Manager::removeGroup(int idGroup)
+{
+    removeGroup(getByIdG(idGroup));
 }
 
 void Manager::createGroup(QString name)

@@ -19,6 +19,7 @@ private:
     Ui::Inclusion *ui;
 signals:
     void cancel();
+    void complete();
 private slots:
     void on_cancelB_clicked();
     void on_pushButton_clicked();

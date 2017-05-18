@@ -20,5 +20,5 @@ void Inclusion::on_cancelB_clicked()
 
 void Inclusion::on_pushButton_clicked()
 {
-
+    emit complete();
 }

@@ -15,13 +15,14 @@ public:
     explicit GroupForm(QWidget *parent = 0);
     ~GroupForm();
     void createGroup();
-    int index;
+    int id;
     Manager* manager;
 
 private:
     Ui::GroupForm *ui;
 public slots:
     void createdGroup(int index);
+    void updateIncl();
 
 };
 

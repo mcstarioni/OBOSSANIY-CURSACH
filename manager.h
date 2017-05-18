@@ -20,7 +20,10 @@ public:
     Group* getByIdG(int id);
     void includeIns(Instruments* ins, Group* group);
     void includeIns(int idIns, int idGroup);
-    //void removeInstrument(int id);
+    void removeInstrument(Instruments* ins);
+    void removeGroup(Group *gr);
+    void removeInstrument(int idIns);
+    void removeGroup(int isGroup);
     void createDrum(int af, QString name, int bpm,bool open);
     void createPlate(int af, QString name, int bpm,int diameter);
     void createViolin(int af, QString name,int strings, int bowType);
