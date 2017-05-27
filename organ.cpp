@@ -6,6 +6,8 @@ Organ::Organ(QWidget *parent) :
     ui(new Ui::Organ)
 {
     ui->setupUi(this);
+    pipes = 0;
+    keys = 0;
 }
 
 Organ::~Organ()

@@ -1,5 +1,6 @@
 #include "group.h"
 #include <QVector>
+#include <instruments.h>
 int Group::groupCount = 0;
 int Group::lastId = 0;
 Group::Group()
@@ -13,12 +14,10 @@ void Group::addInstrument(Instruments *i)
     if(!orchestra->contains(i))
         orchestra->push_back(i);
 }
-
 void Group::removeInstrument(Instruments *i)
 {
     orchestra->removeOne(i);
 }
-
 QVector<Instruments*>* Group::getInstruments()
 {
     return orchestra;
@@ -41,3 +40,4 @@ Group::~Group()
     }
 }
 int Group::Id(){return id;}
+

@@ -18,11 +18,14 @@ public:
     int id;
     Manager* manager;
 
+
 private:
     Ui::GroupForm *ui;
 public slots:
     void createdGroup(int index);
     void updateIncl();
+    void change();
+
 
 };
 

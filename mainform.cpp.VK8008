@@ -12,24 +12,15 @@ MainForm::MainForm(QWidget *parent) :
     addition = new Addition;
     inclusion = new Inclusion;
     remove = new removal();
-    change = new Change();
-    search = new Search();
     addition->hide();
     inclusion->hide();
     remove->hide();
-    change->hide();
-    search->hide();
     connect(addition,SIGNAL(cancel()),SLOT(toSimpleView()));
     connect(inclusion,SIGNAL(cancel()),SLOT(toSimpleView()));
     connect(remove,SIGNAL(cancel()),SLOT(toSimpleView()));
-    connect(change,SIGNAL(cancel()),SLOT(toSimpleView()));
-
     connect(addition,SIGNAL(additionComplete(CheckableForm*,int)),SLOT(on_additionComplete(CheckableForm*,int)));
     connect(inclusion,SIGNAL(complete()),SLOT(on_inclusionComplete()));
     connect(remove,SIGNAL(complete()),SLOT(on_removalComplete()));
-    connect(change,SIGNAL(startEdition()),SLOT(on_changeStarted()));
-    connect(change,SIGNAL(complete()),SLOT(on_changeComplete()));
-
     widgetLast = (QWidget*)addition;
     vectorW = new QVector<CheckableForm*>();
     vectorG = new QVector<CheckableForm*>();
@@ -39,7 +30,6 @@ MainForm::MainForm(QWidget *parent) :
     ui->actionLayout->addWidget(addition);
     ui->actionLayout->addWidget(inclusion);
     ui->actionLayout->addWidget(remove);
-    ui->actionLayout->addWidget(change);
 }
 
 MainForm::~MainForm()
@@ -51,8 +41,6 @@ MainForm::~MainForm()
     delete inclusion;
     delete addition;
     delete remove;
-    delete change;
-    delete search;
     delete ui;
 }
 void MainForm::on_inclusionB_clicked()
@@ -96,7 +84,6 @@ void MainForm::on_removeB_clicked()
 
 void MainForm::on_searchB_clicked()
 {
-
     last->setChecked(false);
     ui->searchB->setChecked(true);
     widgetLast->hide();
@@ -105,15 +92,10 @@ void MainForm::on_searchB_clicked()
 
 void MainForm::on_changeB_clicked()
 {
-    toggledG->clear();
-    toggledW->clear();
     last->setChecked(false);
     ui->changeB->setChecked(true);
     widgetLast->hide();
-    change->show();
-    setSelectable(true);
     last = ui->changeB;
-    widgetLast = change;
 }
 void MainForm::toSimpleView()
 {
@@ -134,7 +116,6 @@ void MainForm::on_addB_toggled(bool checked)
 }
 void MainForm::on_additionComplete(CheckableForm* form, int type)
 {
-
     connect(form,SIGNAL(toggled(bool)),SLOT(formToggled(bool)));
     if(type == 1)
     {
@@ -220,20 +201,17 @@ void MainForm::on_pushButton_clicked()
 }
 void MainForm::on_removalComplete()
 {
-
     for(int i = 0; i < toggledW->size(); i++)
     {
-        CheckableForm* deleted = toggledW->at(i);
-        Manager::getInstance()->removeInstrument(deleted->id);
-        vectorW->removeOne(deleted);
-        delete deleted;
+        vectorW->removeOne(toggledW->at(i));
+        //Manager::getInstance()->removeInstrument(toggledW->at(i)->id);
+        //delete toggledW->at(i);
     }
     for(int i = 0; i < toggledG->size(); i++)
     {
-        CheckableForm* deleted = toggledG->at(i);
-        Manager::getInstance()->removeGroup(deleted->id);
-        vectorG->removeOne(toggledG->at(i));
-        delete deleted;
+        Manager::getInstance()->removeGroup(toggledG->at(i)->id);
+        //vectorG->removeOne(toggledG->at(i));
+        //toggle;
     }
     for(int i = 0; i < vectorW->size(); i++)
     {
@@ -243,46 +221,5 @@ void MainForm::on_removalComplete()
     {
         vectorW->at(i)->updateInclusions();
     }
-    toggledG->clear();
-    toggledW->clear();
 }
-void MainForm::on_changeComplete()
-{
-    for(int i = 0; i < toggledW->size(); i++)
-    {
-        toggledW->at(i)->change();
-    }
-    for(int i = 0; i < toggledG->size(); i++)
-    {
-        toggledG->at(i)->change();
-    }
-    toggledW->clear();
-    toggledG->clear();
-    toSimpleView();
-}
-void MainForm::on_changeStarted()
-{
-    for(int i = 0; i < toggledW->size(); i++)
-    {
-        toggledW->at(i)->setEnabled(true);
-    }
-    for(int i = 0; i < toggledG->size(); i++)
-    {
-        toggledG->at(i)->setEnabled(true);
-    }
-    setSelectable(false);
-}
-
-void MainForm::on_searchComplete()
-{
-//    for(int i = 0; i < toggledW->size(); i++)
-//    {
-//        toggledW->at(i)->setEnabled(true);
-//    }
-//    for(int i = 0; i < toggledG->size(); i++)
-//    {
-//        toggledG->at(i)->setEnabled(true);
-//    }
-}
-
 

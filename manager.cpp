@@ -266,7 +266,14 @@ void Manager::setOrgan(int id,int af, QString name,int keys, int pipes,Instrumen
         t->setPipes(pipes);
     }
 }
-
+void Manager::setGroup(int id, QString str)
+{
+    Group* gr = getByIdG(id);
+    if(gr != 0)
+    {
+        gr->setName(str);
+    }
+}
 
 
 

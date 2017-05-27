@@ -4,6 +4,7 @@
 #include "groupform.h"
 #include "checkableform.h"
 #include <QDebug>
+#include <QPushButton>
 Addition::Addition(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Addition)
@@ -11,7 +12,7 @@ Addition::Addition(QWidget *parent) :
     ui->setupUi(this);
     insform = 0;
     groupform = 0;
-    addPressed = false;
+    last = ui->createIns;
 }
 
 Addition::~Addition()
@@ -20,45 +21,6 @@ Addition::~Addition()
     delete insform;
     delete ui;
 }
-
-void Addition::on_createIns_toggled(bool checked)
-{
-    if(checked)
-    {
-        if(groupform != 0)
-        {
-            groupform->hide();
-        }
-        ui->createGroup->setChecked(false);
-        if(insform == 0)
-        {
-            insform = new BoxIns(ui->comboBox->currentIndex());
-            ui->additionLayout->addWidget(insform);
-            qDebug()<<"togled";
-        }
-        insform->show();
-    }
-}
-
-void Addition::on_createGroup_toggled(bool checked)
-{
-    if(checked)
-    {
-        if(insform != 0)
-        {
-            insform->hide();
-        }
-        ui->createIns->setChecked(false);
-        if(groupform == 0)
-        {
-            groupform = new GroupForm();
-            ui->additionLayout->addWidget(groupform);
-
-        }
-        groupform->show();
-    }
-}
-
 void Addition::on_comboBox_currentIndexChanged(int index)
 {
     if(insform !=0 && ui->createIns->isChecked() == true)
@@ -75,19 +37,15 @@ void Addition::on_cancel_clicked()
 void Addition::on_accept_clicked()
 {
 
-    qDebug()<<"inAccept 1";
     int type = 1;
     CheckableForm *form = new CheckableForm();
     if(insform !=0 && insform->isHidden() == false)
     {
-        qDebug()<<"inAccept 2";
         insform->createIns();
         form->setWidget(insform);
         form->id = insform->id;
         form->isInstrument = true;
         insform = 0;
-        qDebug()<<"inAccept 3";
-
     }
     else
     {
@@ -106,6 +64,42 @@ void Addition::on_accept_clicked()
     }
     form->setEnabled(false);
     form->setButton(false);
-    qDebug()<<"inAccept 4";
     emit additionComplete(form, type);
+}
+
+void Addition::on_createIns_clicked()
+{
+    last->setChecked(false);
+    last = ui->createIns;
+    last->setChecked(true);
+    if(groupform != 0)
+    {
+        groupform->hide();
+    }
+    if(insform == 0)
+    {
+
+        insform = new BoxIns(ui->comboBox->currentIndex());
+        qDebug()<<"New InsForm "<<insform;
+        ui->additionLayout->addWidget(insform);
+    }
+    insform->show();
+}
+
+void Addition::on_createGroup_clicked()
+{
+    last->setChecked(false);
+    last = ui->createGroup;
+    last->setChecked(true);
+    if(insform != 0)
+    {
+        insform->hide();
+    }
+    if(groupform == 0)
+    {
+        groupform = new GroupForm();
+        qDebug()<<"New groupform "<<insform;
+        ui->additionLayout->addWidget(groupform);
+    }
+    groupform->show();
 }

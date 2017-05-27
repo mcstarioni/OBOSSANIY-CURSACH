@@ -40,7 +40,10 @@ SOURCES += main.cpp\
     checkableform.cpp \
     addition.cpp \
     inclusion.cpp \
-    removal.cpp
+    removal.cpp \
+    change.cpp \
+    search.cpp \
+    inssearch.cpp
 
 HEADERS  += \
     instruments.h \
@@ -59,7 +62,10 @@ HEADERS  += \
     checkableform.h \
     addition.h \
     inclusion.h \
-    removal.h
+    removal.h \
+    change.h \
+    search.h \
+    inssearch.h
 
 FORMS    += \
     mainform.ui \
@@ -74,4 +80,7 @@ FORMS    += \
     checkableform.ui \
     addition.ui \
     inclusion.ui \
-    removal.ui
+    removal.ui \
+    change.ui \
+    search.ui \
+    inssearch.ui

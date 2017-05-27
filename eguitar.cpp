@@ -6,7 +6,8 @@ EGuitar::EGuitar(QWidget *parent) :
     ui(new Ui::EGuitar)
 {
     ui->setupUi(this);
-
+    strings = 0;
+    pickup = 0;
 }
 
 EGuitar::~EGuitar()

@@ -37,3 +37,8 @@ void GroupForm::updateIncl()
         ui->listWidget->addItem(str);
     }
 }
+void GroupForm::change()
+{
+    Manager::getInstance()->setGroup(id,ui->lineEdit->text());
+    this->setEnabled(false);
+}

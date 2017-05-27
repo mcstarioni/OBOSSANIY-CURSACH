@@ -16,7 +16,7 @@ private:
     static int lastId;
     QString name;
     int averageFrequency;
-    QVector<Group*> *groups;
+    QVector<Group*>* groups;
 public:
     int Type();
     int Id();
@@ -82,7 +82,7 @@ private:
     int bow;
     static const bool potentiometer;
 public:
-    Violins(int b = 0):Stringed(4,10000,1),bow(b){}
+    Violins(int b = 0):Stringed(4,10000,2),bow(b){}
     int getBow();
     void setBow(int b);
     bool hasPotentiometer();

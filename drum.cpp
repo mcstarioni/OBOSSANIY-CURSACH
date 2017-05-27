@@ -6,6 +6,8 @@ Drum::Drum(QWidget *parent) :
     ui(new Ui::Drum)
 {
     ui->setupUi(this);
+    bpm = 0;
+    isOpen = false;
 }
 
 Drum::~Drum()

@@ -70,7 +70,14 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <layout class="QHBoxLayout" name="labelPlace"/>
+      <widget class="QLabel" name="idLabel">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>NotSet</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

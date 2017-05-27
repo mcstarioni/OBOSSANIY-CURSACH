@@ -6,6 +6,8 @@ Synth::Synth(QWidget *parent) :
     ui(new Ui::Synth)
 {
     ui->setupUi(this);
+    voices = 0;
+    keys = 0;
 }
 
 Synth::~Synth()

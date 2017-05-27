@@ -25,6 +25,7 @@ public slots:
     void setButton(bool);
     void setEnabled(bool);
     void updateInclusions();
+    void change();
 signals:
     void toggled(bool status);
 private:

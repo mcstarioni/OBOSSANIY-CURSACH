@@ -10,15 +10,14 @@
 #include <QDebug>
 BoxIns::BoxIns(int i,QWidget *parent) :
     QGroupBox(parent),
-    ui(new Ui::BoxIns),type(i)
+    ui(new Ui::BoxIns)
 {
-    qDebug()<<"Created";
+    type = i;
     lastClass = 0;
     ui->setupUi(this);
     manager = Manager::getInstance();
-    qDebug()<<"Created 1.5";
     connect(manager,SIGNAL(createdIns(int)),SLOT(objectCreated(int)));
-    qDebug()<<"Created 2";
+    setClass();
 }
 void BoxIns::setClass()
 {
@@ -118,11 +117,10 @@ void BoxIns::classChanged(int i)
 }
 void BoxIns::objectCreated(int id)
 {
-    qDebug()<<"in signal 1";
-    this->id = id;
-    ui->labelPlace->addWidget(new QLabel(QString::number(id)));
-    qDebug()<<"in signal 2";
 
+    this->id = id;
+    QLabel* label = ui->idLabel;
+    label->setText(QString::number(id));
 }
 void BoxIns::addGroup(QString group)
 {
@@ -142,4 +140,48 @@ void BoxIns::updateIncl()
         ui->groups->addItem(str);
     }
 }
+void BoxIns::change()
+{
+    switch (type) {
+    case 0:
 
+        manager->setDrum(id,ui->freq->text().toInt(),
+                            ui->nameEdit->text(),
+                            ((Drum*)lastClass)->bpm,
+                            ((Drum*)lastClass)->isOpen);
+        break;
+    case 1:
+        manager->setPlate(id,ui->freq->text().toInt(),
+                             ui->nameEdit->text(),
+                             ((Plates*)lastClass)->bpm,
+                             ((Plates*)lastClass)->diameter);
+        break;
+    case 2:
+        manager->setViolin(id,ui->freq->text().toInt(),
+                              ui->nameEdit->text(),
+                              ((Violin*)lastClass)->strings,
+                              ((Violin*)lastClass)->bow);
+        break;
+    case 3:
+        manager->setGuitar(id,ui->freq->text().toInt(),
+                              ui->nameEdit->text(),
+                              ((EGuitar*)lastClass)->strings,
+                              ((EGuitar*)lastClass)->pickup);
+        break;
+    case 4:
+        manager->setSynth(id,ui->freq->text().toInt(),
+                             ui->nameEdit->text(),
+                             ((Synth*)lastClass)->keys,
+                             ((Synth*)lastClass)->voices);
+        break;
+    case 5:
+        manager->setOrgan(id,ui->freq->text().toInt(),
+                             ui->nameEdit->text(),
+                             ((Organ*)lastClass)->keys,
+                             ((Organ*)lastClass)->pipes);
+        break;
+    default:
+        break;
+    }
+    this->setEnabled(false);
+}

@@ -12,7 +12,7 @@ class BoxIns : public QGroupBox
     Q_OBJECT
 
 public:
-    explicit BoxIns(int type,QWidget *parent = 0);
+    explicit BoxIns(int type,  QWidget *parent = 0);
     int type;
     int id;
     QWidget* lastClass;
@@ -24,6 +24,7 @@ public slots:
     void objectCreated(int id);
     void addGroup(QString group);
     void updateIncl();
+    void change();
 private:
     Ui::BoxIns *ui;
     Manager* manager;

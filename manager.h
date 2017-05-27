@@ -38,7 +38,7 @@ public:
     void setGuitar(int id,int af, QString name,int strings, int pickupType,Instruments *ins = 0);
     void setSynth(int id,int af, QString name,int keys, int voices,Instruments *ins = 0);
     void setOrgan(int id,int af, QString name,int keys, int pipes,Instruments *ins = 0);
-    //void setGroup(QString name);
+    void setGroup(int id, QString name);
 
     static Manager* getInstance()
     {

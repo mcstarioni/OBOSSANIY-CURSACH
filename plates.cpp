@@ -6,6 +6,8 @@ Plates::Plates(QWidget *parent) :
     ui(new Ui::Plates)
 {
     ui->setupUi(this);
+    bpm = 0;
+    diameter = 0;
 }
 
 Plates::~Plates()

@@ -1,7 +1,7 @@
 #include "instruments.h"
 #include "group.h"
 #include <QDebug>
-
+#include <QVector>
 int Instruments::instrumentsCount = 0;
 int Instruments::lastId = 0;
 Instruments::Instruments(int freq,int type)
@@ -20,7 +20,8 @@ Instruments::~Instruments()
     {
         groups->at(i)->removeInstrument(this);
     }
-    groups->clear();
+    //groups->clear();
+    delete groups;
     Instruments::instrumentsCount--;
 }
 int Instruments::getFrequency(){return this->averageFrequency;}

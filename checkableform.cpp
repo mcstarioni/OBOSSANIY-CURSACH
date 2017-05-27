@@ -7,10 +7,12 @@ CheckableForm::CheckableForm(QWidget *parent) :
     ui(new Ui::CheckableForm)
 {
     ui->setupUi(this);
-
+    isChecked = false;
+    id = -1;
 }
 CheckableForm::~CheckableForm()
 {
+    delete widget;
     delete ui;
 }
 void CheckableForm::setWidget(QWidget *w)
@@ -26,6 +28,7 @@ void CheckableForm::on_radioButton_toggled(bool checked)
 }
 void CheckableForm::setButton(bool shown)
 {
+    ui->radioButton->setChecked(false);
     if(shown)
     {
         ui->radioButton->show();
@@ -34,9 +37,7 @@ void CheckableForm::setButton(bool shown)
     {
         ui->radioButton->hide();
     }
-    ui->radioButton->setChecked(false);
 }
-
 void CheckableForm::setEnabled(bool status)
 {
     widget->setEnabled(status);
@@ -45,12 +46,20 @@ void CheckableForm::updateInclusions()
 {
     if(isInstrument)
     {
-        //qDebug()<<"updated 2";
         ((BoxIns*)widget)->updateIncl();
     }else
     {
-        //qDebug()<<"updated 2";
         ((GroupForm*)widget)->updateIncl();
+    }
+}
+void CheckableForm::change()
+{
+    if(isInstrument)
+    {
+        ((BoxIns*)widget)->change();
+    }else
+    {
+        ((GroupForm*)widget)->change();
     }
 }
 

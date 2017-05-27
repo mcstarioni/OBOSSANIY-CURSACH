@@ -6,6 +6,8 @@ Violin::Violin(QWidget *parent) :
     ui(new Ui::Violin)
 {
     ui->setupUi(this);
+    strings = 0;
+    bow = 0;
 }
 
 Violin::~Violin()
