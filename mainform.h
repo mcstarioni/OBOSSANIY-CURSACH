@@ -18,18 +18,22 @@ class MainForm: public QWidget
 
 private:
     Ui::MainForm* ui;
-    QWidget *widgetLast;
     int actionType;
     Addition* addition;
     Inclusion* inclusion;
     removal* remove;
     Change* change;
     Search* search;
-    QVector<CheckableForm*>* toggledW;
-    QVector<CheckableForm*>* toggledG;
-    QVector<CheckableForm*>* vectorW;
-    QVector<CheckableForm*>* vectorG;
-    QPushButton *last;
+    QWidget* simple;
+    QVector<CheckableForm*>* toggledIns;
+    QVector<CheckableForm*>* toggledGroup;
+    QVector<CheckableForm*>* allFormsIns;
+    QVector<CheckableForm*>* allFormsGroup;
+    QPushButton *lastButton;
+    QWidget *lastWidget;
+    void showScrollAreas(bool show);
+    void nextMenuButtonClicked(QPushButton* nextMenuButton, QWidget *nextMenu);
+    void clearToggledVectors();
 public:
 
     explicit MainForm(QWidget *parent = 0);
@@ -51,7 +55,8 @@ private slots:
     void on_searchComplete();
     void setSelectable(bool);
     void formToggled(bool toggled);
-    void on_pushButton_clicked();
+    void on_simpleB_clicked();
+    void on_searchB_toggled(bool checked);
 };
 
 #endif // MainForm_H

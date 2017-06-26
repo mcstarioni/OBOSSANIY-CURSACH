@@ -43,7 +43,8 @@ SOURCES += main.cpp\
     removal.cpp \
     change.cpp \
     search.cpp \
-    inssearch.cpp
+    inssearch.cpp \
+    groupsearch.cpp
 
 HEADERS  += \
     instruments.h \
@@ -65,7 +66,8 @@ HEADERS  += \
     removal.h \
     change.h \
     search.h \
-    inssearch.h
+    inssearch.h \
+    groupsearch.h
 
 FORMS    += \
     mainform.ui \
@@ -83,4 +85,5 @@ FORMS    += \
     removal.ui \
     change.ui \
     search.ui \
-    inssearch.ui
+    inssearch.ui \
+    groupsearch.ui

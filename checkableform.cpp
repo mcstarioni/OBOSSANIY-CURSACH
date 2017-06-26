@@ -7,7 +7,6 @@ CheckableForm::CheckableForm(QWidget *parent) :
     ui(new Ui::CheckableForm)
 {
     ui->setupUi(this);
-    isChecked = false;
     id = -1;
 }
 CheckableForm::~CheckableForm()
@@ -20,14 +19,9 @@ void CheckableForm::setWidget(QWidget *w)
     widget = w;
     ui->toShow->addWidget(w);
 }
-
-void CheckableForm::on_radioButton_toggled(bool checked)
-{
-    isChecked = checked;
-    emit toggled(checked);
-}
 void CheckableForm::setButton(bool shown)
 {
+
     ui->radioButton->setChecked(false);
     if(shown)
     {
@@ -64,3 +58,9 @@ void CheckableForm::change()
 }
 
 
+
+void CheckableForm::on_radioButton_clicked()
+{
+    emit toggled(ui->radioButton->isChecked());
+
+}

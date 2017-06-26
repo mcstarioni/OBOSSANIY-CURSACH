@@ -91,7 +91,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="simpleB">
        <property name="text">
         <string>Просмотр</string>
        </property>
@@ -125,7 +125,7 @@
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollW">
+       <widget class="QWidget" name="scrollIns">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -156,7 +156,7 @@
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
-       <widget class="QWidget" name="scrollG">
+       <widget class="QWidget" name="scrollGroup">
         <property name="geometry">
          <rect>
           <x>0</x>

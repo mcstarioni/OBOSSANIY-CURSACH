@@ -2,6 +2,7 @@
 #include <QApplication>
 #include <QDebug>
 #include "manager.h"
+#include "inssearch.h"
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

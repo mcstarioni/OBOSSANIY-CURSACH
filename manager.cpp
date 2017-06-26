@@ -7,7 +7,6 @@ Manager::Manager(QObject *parent):
 {
     qDebug()<<"manager created";
     database = Database::getInstance();
-
 }
 Manager::~Manager()
 {
@@ -273,6 +272,31 @@ void Manager::setGroup(int id, QString str)
     {
         gr->setName(str);
     }
+}
+QString Manager::getPossibleNameIns(int type)
+{
+    QString name = Instruments::getTypeName(type);
+    switch(type)
+    {
+    case 0:
+        return name + QString::number(Drums::getInstrumentsCount());
+    case 1:
+        return name + QString::number(Plate::getInstrumentsCount());
+    case 2:
+        return name + QString::number(Violins::getInstrumentsCount());
+    case 3:
+        return name + QString::number(EGuitars::getInstrumentsCount());
+    case 4:
+        return name + QString::number(Synths::getInstrumentsCount());
+    case 5:
+        return name + QString::number(Organs::getInstrumentsCount());
+    default:
+        return "WTF?";
+    }
+}
+QString Manager::getTypeName(int type)
+{
+    return Instruments::getTypeName(type);
 }
 
 

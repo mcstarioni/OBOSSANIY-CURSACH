@@ -2,8 +2,16 @@
 #include "group.h"
 #include <QDebug>
 #include <QVector>
+
 int Instruments::instrumentsCount = 0;
 int Instruments::lastId = 0;
+int Drums::drumsCount = 0;
+int Plate::platesCount = 0;
+int Violins::violinsCount = 0;
+int EGuitars::eguitarsCount = 0;
+int Synths::synthCount = 0;
+int Organs::organsCount = 0;
+
 Instruments::Instruments(int freq,int type)
 {
     this->type = type;
@@ -20,7 +28,6 @@ Instruments::~Instruments()
     {
         groups->at(i)->removeInstrument(this);
     }
-    //groups->clear();
     delete groups;
     Instruments::instrumentsCount--;
 }
@@ -37,6 +44,10 @@ int Instruments::Id(){return this->id;}
 int Instruments::Type(){return type;}
 QVector<Group*>* Instruments::getGroups(){return groups;}
 QString Instruments::getTypeName()
+{
+    return Instruments::getTypeName(this->type);
+}
+QString Instruments::getTypeName(int type)
 {
     switch(type)
     {
@@ -56,7 +67,6 @@ QString Instruments::getTypeName()
         return "WTF?";
     }
 }
-
 int Drumming::getBPM(){return this->beatPerMinute;}
 void Drumming::setBPM(int bpm){this->beatPerMinute = bpm;}
 

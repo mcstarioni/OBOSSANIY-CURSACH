@@ -18,6 +18,8 @@ public:
 
     Instruments* getById(int id);
     Group* getByIdG(int id);
+    QString getTypeName(int type);
+    QString getPossibleNameIns(int type);
     void includeIns(Instruments* ins, Group* group);
     void includeIns(int idIns, int idGroup);
     void removeInstrument(Instruments* ins);

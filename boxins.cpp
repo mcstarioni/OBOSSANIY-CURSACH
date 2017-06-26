@@ -25,47 +25,42 @@ void BoxIns::setClass()
     {
         delete lastClass;
     }
-    switch (type) {
+    switch (type)
+    {
     case 0:
-        this->setTitle("Барабан");
         lastClass = new Drum;
-        ui->classLayout->addWidget(lastClass);
         break;
     case 1:
-        setTitle("Тарелки");
         lastClass = new Plates;
-        ui->classLayout->addWidget(lastClass);
         break;
     case 2:
-        setTitle("Скрипка");
         lastClass = new Violin;
-        ui->classLayout->addWidget(lastClass);
         break;
     case 3:
-        setTitle("Электрогитара");
         lastClass = new EGuitar;
-        ui->classLayout->addWidget(lastClass);
         break;
     case 4:
-        setTitle("Синтезатор");
         lastClass = new Synth;
-        ui->classLayout->addWidget(lastClass);
         break;
     case 5:
-        setTitle("Орган");
         lastClass = new Organ;
-        ui->classLayout->addWidget(lastClass);
         break;
     default:
-        break;
+        return;
     }
+    QString insTypeName = manager->getTypeName(type);
+    setTitle(insTypeName);
+    ui->nameEdit->setText(manager->getPossibleNameIns(type));
+    ui->classLayout->addWidget(lastClass);
 }
+
 
 BoxIns::~BoxIns()
 {
     delete lastClass;
     delete ui;
 }
+
 void BoxIns::createIns()
 {
     switch (type) {
@@ -122,10 +117,12 @@ void BoxIns::objectCreated(int id)
     QLabel* label = ui->idLabel;
     label->setText(QString::number(id));
 }
+
 void BoxIns::addGroup(QString group)
 {
     this->ui->groups->addItem(group);
 }
+
 void BoxIns::updateIncl()
 {
     ui->groups->clear();
@@ -140,6 +137,7 @@ void BoxIns::updateIncl()
         ui->groups->addItem(str);
     }
 }
+
 void BoxIns::change()
 {
     switch (type) {

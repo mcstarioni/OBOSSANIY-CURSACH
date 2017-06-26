@@ -14,6 +14,7 @@ MainForm::MainForm(QWidget *parent) :
     remove = new removal();
     change = new Change();
     search = new Search();
+    simple = new QWidget();
     addition->hide();
     inclusion->hide();
     remove->hide();
@@ -23,6 +24,7 @@ MainForm::MainForm(QWidget *parent) :
     connect(inclusion,SIGNAL(cancel()),SLOT(toSimpleView()));
     connect(remove,SIGNAL(cancel()),SLOT(toSimpleView()));
     connect(change,SIGNAL(cancel()),SLOT(toSimpleView()));
+    connect(search,SIGNAL(cancel()),SLOT(toSimpleView()));
 
     connect(addition,SIGNAL(additionComplete(CheckableForm*,int)),SLOT(on_additionComplete(CheckableForm*,int)));
     connect(inclusion,SIGNAL(complete()),SLOT(on_inclusionComplete()));
@@ -30,24 +32,26 @@ MainForm::MainForm(QWidget *parent) :
     connect(change,SIGNAL(startEdition()),SLOT(on_changeStarted()));
     connect(change,SIGNAL(complete()),SLOT(on_changeComplete()));
 
-    widgetLast = (QWidget*)addition;
-    vectorW = new QVector<CheckableForm*>();
-    vectorG = new QVector<CheckableForm*>();
-    toggledW = new QVector<CheckableForm*>();
-    toggledG = new QVector<CheckableForm*>();
-    last = ui->pushButton;
+    lastWidget = (QWidget*)addition;
+    allFormsIns = new QVector<CheckableForm*>();
+    allFormsGroup = new QVector<CheckableForm*>();
+    toggledIns = new QVector<CheckableForm*>();
+    toggledGroup = new QVector<CheckableForm*>();
+    lastButton = ui->simpleB;
     ui->actionLayout->addWidget(addition);
     ui->actionLayout->addWidget(inclusion);
     ui->actionLayout->addWidget(remove);
     ui->actionLayout->addWidget(change);
+    ui->actionLayout->addWidget(search);
+    ui->actionLayout->addWidget(simple);
 }
 
 MainForm::~MainForm()
 {
-    delete toggledW;
-    delete toggledG;
-    delete vectorW;
-    delete vectorG;
+    delete toggledIns;
+    delete toggledGroup;
+    delete allFormsIns;
+    delete allFormsGroup;
     delete inclusion;
     delete addition;
     delete remove;
@@ -57,129 +61,99 @@ MainForm::~MainForm()
 }
 void MainForm::on_inclusionB_clicked()
 {
-    toggledG->clear();
-    toggledW->clear();
-    last->setChecked(false);
-    ui->inclusionB->setChecked(true);
-    widgetLast->hide();
-    inclusion->show();
-    setSelectable(true);
-    last = ui->inclusionB;
-    widgetLast = inclusion;
-
+    nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),inclusion);
+    clearToggledVectors();
 }
 
 void MainForm::on_addB_clicked()
 {
-    last->setChecked(false);
-    ui->addB->setChecked(true);
-    widgetLast->hide();
-    addition->show();
-    last = ui->addB;
-    ui->scrollArea->hide();
-    ui->scrollArea_2->hide();
-    widgetLast = addition;
+    nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),addition);
 }
 
 void MainForm::on_removeB_clicked()
 {
-    toggledG->clear();
-    toggledW->clear();
-    last->setChecked(false);
-    ui->removeB->setChecked(true);
-    widgetLast->hide();
-    remove->show();
-    setSelectable(true);
-    last = ui->removeB;
-    widgetLast = remove;
+    nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),remove);
+    clearToggledVectors();
 }
 
 void MainForm::on_searchB_clicked()
 {
-
-    last->setChecked(false);
-    ui->searchB->setChecked(true);
-    widgetLast->hide();
-    last = ui->searchB;
+    nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),search);
 }
 
 void MainForm::on_changeB_clicked()
 {
-    toggledG->clear();
-    toggledW->clear();
-    last->setChecked(false);
-    ui->changeB->setChecked(true);
-    widgetLast->hide();
-    change->show();
-    setSelectable(true);
-    last = ui->changeB;
-    widgetLast = change;
+    nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),change);
+    clearToggledVectors();
 }
+
+void MainForm::on_simpleB_clicked()
+{
+    toSimpleView();
+}
+
 void MainForm::toSimpleView()
 {
-    last->setChecked(false);
-    last = ui->pushButton;
+    nextMenuButtonClicked(ui->simpleB,simple);
     setSelectable(false);
-    widgetLast->hide();
 }
 
 void MainForm::on_addB_toggled(bool checked)
 {
-    if(!checked)
+    qDebug()<<"AB_"<<checked;
+    if(lastWidget != search)
     {
-        //toSimpleView();
-        ui->scrollArea->show();
-        ui->scrollArea_2->show();
+    showScrollAreas(!checked);
     }
 }
+
 void MainForm::on_additionComplete(CheckableForm* form, int type)
 {
 
     connect(form,SIGNAL(toggled(bool)),SLOT(formToggled(bool)));
     if(type == 1)
     {
-        ui->scrollW->layout()->addWidget(form);
-        vectorW->push_back(form);
+        ui->scrollIns->layout()->addWidget(form);
+        allFormsIns->push_back(form);
 
     }else
     {
-        ui->scrollG->layout()->addWidget(form);
-        vectorG->push_back(form);
+        ui->scrollGroup->layout()->addWidget(form);
+        allFormsGroup->push_back(form);
     }
 }
+
 void MainForm::setSelectable(bool status)
 {
-    for(int i = 0; i < vectorW->size(); i++)
+    for(int i = 0; i < allFormsIns->size(); i++)
     {
-        vectorW->at(i)->setButton(status);
+        allFormsIns->at(i)->setButton(status);
     }
-    for(int i = 0; i < vectorG->size(); i++)
+    for(int i = 0; i < allFormsGroup->size(); i++)
     {
-        vectorG->at(i)->setButton(status);
+        allFormsGroup->at(i)->setButton(status);
     }
 }
+
 void MainForm::on_inclusionComplete()
 {
-    for(int i = 0; i < toggledG->size(); i++)
+    for(int i = 0; i < toggledGroup->size(); i++)
     {
-        for(int j = 0; j < toggledW->size(); j++)
+        for(int j = 0; j < toggledIns->size(); j++)
         {
-            Manager::getInstance()->includeIns(toggledW->at(j)->id,toggledG->at(i)->id);
+            Manager::getInstance()->includeIns(toggledIns->at(j)->id,toggledGroup->at(i)->id);
         }
     }
-    for(int i = 0; i < toggledG->size(); i++)
+    for(int i = 0; i < toggledGroup->size(); i++)
     {
-        //qDebug()<<"updated";
-        toggledG->at(i)->updateInclusions();
+        toggledGroup->at(i)->updateInclusions();
     }
-    for(int j = 0; j < toggledW->size(); j++)
+    for(int j = 0; j < toggledIns->size(); j++)
     {
-        //qDebug()<<"updated";
-        toggledW->at(j)->updateInclusions();
+        toggledIns->at(j)->updateInclusions();
     }
     toSimpleView();
 }
-
 
 void MainForm::formToggled(bool toggle)
 {
@@ -188,101 +162,133 @@ void MainForm::formToggled(bool toggle)
     {
         if(form->isInstrument)
         {
-            toggledW->push_back(form);
+            toggledIns->push_back(form);
         }
         else
         {
-            toggledG->push_back(form);
+            toggledGroup->push_back(form);
         }
     }
     else
     {
         if(form->isInstrument)
         {
-            if(toggledW->contains(form))
+            if(toggledIns->contains(form))
             {
-                toggledW->removeOne(form);
+                toggledIns->removeOne(form);
             }
         }
         else
         {
-            if(toggledG->contains(form))
+            if(toggledGroup->contains(form))
             {
-                toggledG->removeOne(form);
+                toggledGroup->removeOne(form);
             }
         }
     }
 }
 
-void MainForm::on_pushButton_clicked()
-{
-    toSimpleView();
-}
 void MainForm::on_removalComplete()
 {
 
-    for(int i = 0; i < toggledW->size(); i++)
+    for(int i = 0; i < toggledIns->size(); i++)
     {
-        CheckableForm* deleted = toggledW->at(i);
+        CheckableForm* deleted = toggledIns->at(i);
         Manager::getInstance()->removeInstrument(deleted->id);
-        vectorW->removeOne(deleted);
+        allFormsIns->removeOne(deleted);
         delete deleted;
     }
-    for(int i = 0; i < toggledG->size(); i++)
+    for(int i = 0; i < toggledGroup->size(); i++)
     {
-        CheckableForm* deleted = toggledG->at(i);
+        CheckableForm* deleted = toggledGroup->at(i);
         Manager::getInstance()->removeGroup(deleted->id);
-        vectorG->removeOne(toggledG->at(i));
+        allFormsGroup->removeOne(toggledGroup->at(i));
         delete deleted;
     }
-    for(int i = 0; i < vectorW->size(); i++)
+    for(int i = 0; i < allFormsIns->size(); i++)
     {
-        vectorW->at(i)->updateInclusions();
+        allFormsIns->at(i)->updateInclusions();
     }
-    for(int i = 0; i < vectorG->size(); i++)
+    for(int i = 0; i < allFormsGroup->size(); i++)
     {
-        vectorW->at(i)->updateInclusions();
+        allFormsIns->at(i)->updateInclusions();
     }
-    toggledG->clear();
-    toggledW->clear();
+    clearToggledVectors();
 }
+
 void MainForm::on_changeComplete()
 {
-    for(int i = 0; i < toggledW->size(); i++)
+    for(int i = 0; i < toggledIns->size(); i++)
     {
-        toggledW->at(i)->change();
+        toggledIns->at(i)->change();
     }
-    for(int i = 0; i < toggledG->size(); i++)
+    for(int i = 0; i < toggledGroup->size(); i++)
     {
-        toggledG->at(i)->change();
+        toggledGroup->at(i)->change();
     }
-    toggledW->clear();
-    toggledG->clear();
+    clearToggledVectors();
     toSimpleView();
 }
+
 void MainForm::on_changeStarted()
 {
-    for(int i = 0; i < toggledW->size(); i++)
+    for(int i = 0; i < toggledIns->size(); i++)
     {
-        toggledW->at(i)->setEnabled(true);
+        toggledIns->at(i)->setEnabled(true);
     }
-    for(int i = 0; i < toggledG->size(); i++)
+    for(int i = 0; i < toggledGroup->size(); i++)
     {
-        toggledG->at(i)->setEnabled(true);
+        toggledGroup->at(i)->setEnabled(true);
     }
     setSelectable(false);
 }
 
 void MainForm::on_searchComplete()
 {
-//    for(int i = 0; i < toggledW->size(); i++)
+//    for(int i = 0; i < toggledIns->size(); i++)
 //    {
-//        toggledW->at(i)->setEnabled(true);
+//        toggledIns->at(i)->setEnabled(true);
 //    }
-//    for(int i = 0; i < toggledG->size(); i++)
+//    for(int i = 0; i < toggledGroup->size(); i++)
 //    {
-//        toggledG->at(i)->setEnabled(true);
-//    }
+//        toggledGroup->
 }
 
+void MainForm::showScrollAreas(bool show)
+{
+    if(show)
+    {
+        ui->scrollArea->show();
+        ui->scrollArea_2->show();
+    }
+    else
+    {
+        ui->scrollArea->hide();
+        ui->scrollArea_2->hide();
+    }
+}
 
+void MainForm::nextMenuButtonClicked(QPushButton* nextMenuButton, QWidget *nextMenu)
+{
+    nextMenuButton->setChecked(true);
+    lastButton->setChecked(false);
+    lastButton = nextMenuButton;
+    lastWidget->hide();
+    lastWidget = nextMenu;
+    lastWidget->show();
+}
+
+void MainForm::clearToggledVectors()
+{
+    toggledGroup->clear();
+    toggledIns->clear();
+}
+
+void MainForm::on_searchB_toggled(bool checked)
+{
+    qDebug()<<"SB_"<<checked;
+    if(lastWidget != addition)
+    {
+        showScrollAreas(!checked);
+    }
+}
