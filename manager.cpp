@@ -16,7 +16,7 @@ Manager::~Manager()
 //QVector<QString>* Manager::searchInstruments(int index, indexCompType, int averFreq, int averFreqCompType,
 //                                   QString name, int nameCompType, int classType)
 //{
-//    \
+//
 //}
 
 Instruments* Manager::getById(int id)

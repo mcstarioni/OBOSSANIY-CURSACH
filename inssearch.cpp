@@ -1,21 +1,20 @@
 #include "inssearch.h"
 #include "ui_inssearch.h"
-
+#include "searchargument.h"
 InsSearch::InsSearch(bool final,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::InsSearch)
 {
     groupSearch = 0;
     ui->setupUi(this);
-    freq = new Search::SearchArgument<int>(0,notImportant);
-    id = new Search::SearchArgument<int>(0,notImportant);
-    name = new Search::SearchArgument<QString>("",notImportant);
-    classes = new Search::SearchArgument<int>(0,notImportant);
+    freq = new SearchArgument<int>(0,notImportant);
+    id = new SearchArgument<int>(0,notImportant);
+    name = new SearchArgument<QString>("",notImportant);
+    classes = new SearchArgument<int>(0,notImportant);
     if(final)
     {
         ui->groupSearchButton->hide();
     }
-    inputCorrect
 }
 
 InsSearch::~InsSearch()
@@ -26,35 +25,35 @@ InsSearch::~InsSearch()
 void InsSearch::on_comboBox_currentIndexChanged(int index)
 {
     if(index == 0)
-        classes.comparisonType = notImportant;
+        classes->comparisonType = notImportant;
     else
-        classes.comparisonType = equal;
-    classes.value = index - 1;
+        classes->comparisonType = equal;
+    classes->value = index - 1;
 }
 
 void InsSearch::on_idEdit_editingFinished()
 {
-    int result = ui->idEdit->text().toInt();
-    if()
-    id.value =
+    bool success;
+    int result = ui->idEdit->text().toInt(&success);
+    if(success)
+    {
+        id->value = result;
+    }
 }
 
 void InsSearch::on_nameEdit_editingFinished()
 {
-    nameValue = ui->nameEdit->text();
-    parseString(&nameType,&nameValue);
-    if(nameType == -1)
-        isCorrect = false;
+    name->value = ui->nameEdit->text();
 }
 
 void InsSearch::on_freqEdit_editingFinished()
 {
-
-}
-
-void InsSearch::search()
-{
-
+    bool success;
+    int result = ui->freqEdit->text().toInt(&success);
+    if(success)
+    {
+        freq->value = result;
+    }
 }
 
 void InsSearch::on_groupSearchButton_toggled(bool checked)
@@ -83,15 +82,15 @@ void InsSearch::on_groupSearchButton_toggled(bool checked)
 
 void InsSearch::on_nameType_currentIndexChanged(int index)
 {
-    nameType = Search::getComparisonFromIndex(index);
+    name->comparisonType = SearchArgument<int>::getComparisonFromIndex(index);
 }
 
 void InsSearch::on_idType_currentIndexChanged(int index)
 {
-    idType = Search::getComparisonFromIndex(index);
+    id->comparisonType = SearchArgument<int>::getComparisonFromIndex(index);
 }
 
 void InsSearch::on_freqType_currentIndexChanged(int index)
 {
-    freqType = Search::getComparisonFromIndex(index);
+    freq->comparisonType = SearchArgument<int>::getComparisonFromIndex(index);
 }

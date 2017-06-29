@@ -1,6 +1,6 @@
 #include "groupsearch.h"
 #include "ui_groupsearch.h"
-
+#include "searchargument.h"
 GroupSearch::GroupSearch(bool final,QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GroupSearch)
@@ -11,6 +11,8 @@ GroupSearch::GroupSearch(bool final,QWidget *parent) :
     {
         ui->insSearchButton->hide();
     }
+    name = new SearchArgument<QString>("",notImportant);
+    id = new SearchArgument<int>(0,notImportant);
 }
 
 GroupSearch::~GroupSearch()
@@ -20,46 +22,44 @@ GroupSearch::~GroupSearch()
 
 void GroupSearch::on_insSearchButton_toggled(bool checked)
 {
-//    if(checked)
-//    {
-//        if(groupSearch == 0)
-//        {
-//            groupSearch = new GroupSearch(true);
-//            ui->groupAdd->addWidget(groupSearch);
-//        }
-//        groupSearch->show();
-//    }
-//    else
-//    {
-//        if(groupSearch != 0)
-//        {
-//            groupSearch->hide();
-//        }
-//    }
+    if(checked)
+    {
+        if(insSearch == 0)
+        {
+            insSearch = new InsSearch(true);
+            ui->insAdd->addWidget(insSearch);
+        }
+        insSearch->show();
+    }
+    else
+    {
+        if(insSearch != 0)
+        {
+            insSearch->hide();
+        }
+    }
 }
 
 void GroupSearch::on_nameEdit_editingFinished()
 {
-
+    name->value = ui->nameEdit->text();
 }
 void GroupSearch::on_idEdit_editingFinished()
 {
-
-}
-void GroupSearch::search()
-{
-
-}
-void GroupSearch::parseString(int *searchType, QString* searchValue)
-{
-    QChar type = searchValue->at(0);
-    *searchType = (type == '=')?0:
-                ((type == '<')?1:
-                ((type == '>')?2:
-                 (type == '?')?3:-1));
-    if(*searchType == -1)
+    bool success;
+    int result = ui->idEdit->text().toInt(&success);
+    if(success)
     {
-        return;
+        id->value = result;
     }
-    *searchValue = searchValue->right(1);
+}
+
+void GroupSearch::on_idType_currentIndexChanged(int index)
+{
+    id->comparisonType = SearchArgument<int>::getComparisonFromIndex(index);
+}
+
+void GroupSearch::on_nameType_currentIndexChanged(int index)
+{
+    name->comparisonType = SearchArgument<int>::getComparisonFromIndex(index);
 }

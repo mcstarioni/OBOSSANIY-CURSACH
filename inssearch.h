@@ -3,7 +3,7 @@
 #include "groupsearch.h"
 #include <QWidget>
 #include "instruments.h"
-#include "search.h"
+#include "searchargument.h"
 #include <QVector>
 
 class GroupSearch;
@@ -17,10 +17,10 @@ class InsSearch : public QWidget
 public:
     explicit InsSearch(bool final,QWidget *parent = 0);
     ~InsSearch();
-    Search::SearchArgument freq;
-    Search::SearchArgument id;
-    Search::SearchArgument name;
-    Search::SearchArgument classes;
+    SearchArgument<int> *freq;
+    SearchArgument<int> *id;
+    SearchArgument<QString> *name;
+    SearchArgument<int> *classes;
     GroupSearch* groupSearch;
     bool inputCorrect;
 private slots:
