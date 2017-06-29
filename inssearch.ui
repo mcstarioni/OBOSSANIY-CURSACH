@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>262</width>
-    <height>141</height>
+    <width>385</width>
+    <height>147</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,25 +24,39 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="idEdit">
-       <property name="text">
-        <string>=0</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Имя: </string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="nameEdit">
-       <property name="text">
-        <string>=0</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="idEdit">
+         <property name="text">
+          <string>=0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_7">
+         <item>
+          <property name="text">
+           <string>Больше указанного</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Меньше указанного</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Равно</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Не важно</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="label_3">
@@ -51,10 +65,10 @@
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="freqEdit">
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_2">
        <property name="text">
-        <string>=0</string>
+        <string>Имя: </string>
        </property>
       </widget>
      </item>
@@ -114,10 +128,77 @@
        </property>
       </widget>
      </item>
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLineEdit" name="freqEdit">
+         <property name="text">
+          <string>=0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_5">
+         <item>
+          <property name="text">
+           <string>Больше указанного</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Меньше указанного</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Равно</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Не важно</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item row="2" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QLineEdit" name="nameEdit">
+         <property name="text">
+          <string>=0</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_6">
+         <item>
+          <property name="text">
+           <string>Больше указанного</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Меньше указанного</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Равно</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Не важно</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </item>
     </layout>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="groupAdd"/>
    </item>
    <item>
     <spacer name="horizontalSpacer">
@@ -131,6 +212,9 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="groupAdd"/>
    </item>
   </layout>
  </widget>
