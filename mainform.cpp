@@ -139,6 +139,7 @@ void MainForm::setSelectable(bool status)
 
 void MainForm::on_inclusionComplete()
 {
+    qDebug()<<"Fuck Fuck";
     for(int i = 0; i < toggledGroup->size(); i++)
     {
         for(int j = 0; j < toggledIns->size(); j++)
@@ -247,13 +248,6 @@ void MainForm::on_changeStarted()
 
 void MainForm::on_searchComplete()
 {
-//    for(int i = 0; i < toggledIns->size(); i++)
-//    {
-//        toggledIns->at(i)->setEnabled(true);
-//    }
-//    for(int i = 0; i < toggledGroup->size(); i++)
-//    {
-//        toggledGroup->
 }
 
 void MainForm::showScrollAreas(bool show)

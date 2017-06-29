@@ -2,6 +2,7 @@
 #include "QDebug"
 #include "instruments.h"
 #include "database.h"
+#include "search.h"
 Manager::Manager(QObject *parent):
     QObject(parent)
 {
@@ -10,7 +11,14 @@ Manager::Manager(QObject *parent):
 }
 Manager::~Manager()
 {
+
 }
+//QVector<QString>* Manager::searchInstruments(int index, indexCompType, int averFreq, int averFreqCompType,
+//                                   QString name, int nameCompType, int classType)
+//{
+//    \
+//}
+
 Instruments* Manager::getById(int id)
 {
     Instruments *ins;
@@ -298,7 +306,6 @@ QString Manager::getTypeName(int type)
 {
     return Instruments::getTypeName(type);
 }
-
 
 
 

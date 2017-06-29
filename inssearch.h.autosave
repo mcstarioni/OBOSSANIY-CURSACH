@@ -5,6 +5,7 @@
 #include "instruments.h"
 #include "search.h"
 #include <QVector>
+
 class GroupSearch;
 namespace Ui {
 class InsSearch;
@@ -16,33 +17,14 @@ class InsSearch : public QWidget
 public:
     explicit InsSearch(bool final,QWidget *parent = 0);
     ~InsSearch();
-
-    int freqValue;
-    comparison freqType;
-
-    QString nameValue;
-    comparison nameType;
-
-    int idValue;
-    comparison idType;
-
-    int classValue;
-    comparison classType;
-
-    bool isCorrect;
-
+    Search::SearchArgument freq;    
+    Search::SearchArgument id; 
+    Search::SearchArgument name;
+    Search::SearchArgument classes;
     GroupSearch* groupSearch;
-
-    QVector<Instruments*>* find(QVector<Instruments*>* instruments);
-
-    void parseString(int* searchType, QString* searchValue);
-
-    bool checkConditions(Instruments* ins);
-
-    template<class T>
-    bool checkOneCondition(int comparisonType, T value1,T value2);
-
+    
 private slots:
+    
     void on_comboBox_currentIndexChanged(int index);
 
     void on_idEdit_editingFinished();
