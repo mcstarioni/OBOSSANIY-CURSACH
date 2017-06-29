@@ -63,6 +63,7 @@ void MainForm::on_inclusionB_clicked()
 {
     nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),inclusion);
     clearToggledVectors();
+    setSelectable(true);
 }
 
 void MainForm::on_addB_clicked()
@@ -74,6 +75,7 @@ void MainForm::on_removeB_clicked()
 {
     nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),remove);
     clearToggledVectors();
+    setSelectable(true);
 }
 
 void MainForm::on_searchB_clicked()
@@ -85,6 +87,7 @@ void MainForm::on_changeB_clicked()
 {
     nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),change);
     clearToggledVectors();
+    setSelectable(true);
 }
 
 void MainForm::on_simpleB_clicked()
@@ -115,7 +118,6 @@ void MainForm::on_additionComplete(CheckableForm* form, int type)
     {
         ui->scrollIns->layout()->addWidget(form);
         allFormsIns->push_back(form);
-
     }else
     {
         ui->scrollGroup->layout()->addWidget(form);

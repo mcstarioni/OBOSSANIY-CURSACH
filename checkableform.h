@@ -19,7 +19,7 @@ public:
     QWidget* widget;
     void setWidget(QWidget* w);
 private slots:
-    void on_radioButton_clicked();
+    void on_selectionButton_clicked();
 public slots:
     void setButton(bool);
     void setEnabled(bool);
