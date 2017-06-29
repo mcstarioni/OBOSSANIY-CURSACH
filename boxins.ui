@@ -28,7 +28,7 @@
      <item row="1" column="0">
       <widget class="QLabel" name="freqTitle">
        <property name="text">
-        <string>Средняя частота:</string>
+        <string>Средняя частота(Децибелы):</string>
        </property>
       </widget>
      </item>
