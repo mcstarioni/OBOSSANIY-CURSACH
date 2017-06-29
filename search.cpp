@@ -71,10 +71,54 @@ void Search::on_groupButton_toggled(bool checked)
 
 void Search::on_searchButton_clicked()
 {
-}
 
+}
 
 void Search::on_pushButton_clicked()
 {
     emit cancel();
 }
+Comparison Search::getComparisonFromIndex(int index)
+{
+    switch(index)
+    {
+    case 0: return moreThan;
+    case 1: return lessThan;
+    case 2: return equal;
+    case 3: return notImportant;
+    }
+    return notImportant;
+}
+
+template <typename T>
+Search::SearchArgument::SearchArgument(T comparableValue, Comparison type)
+{
+    value = comparableValue;
+    this->type = type;
+}
+
+template <typename T>
+bool Search::SearchArgument::compare(T comparedValue)
+{
+    switch(comparisonType)
+    {
+        case moreThan:
+        {
+            return (comparedValue > value);
+        }
+        case lessThan:
+        {
+            return (comparedValue < value);
+        }
+        case equal:
+        {
+            return (comparedValue == value);
+        }
+        case notImportant:
+        {
+            return true;
+        }
+    }
+    return false;
+}
+

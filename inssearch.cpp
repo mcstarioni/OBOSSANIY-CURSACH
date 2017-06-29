@@ -96,7 +96,7 @@ bool InsSearch::checkConditions(Instruments* ins)
             );
 }
 template <class T>
-bool InsSearch::checkOneCondition(int comparisonType, T value1,T value2)
+bool InsSearch::checkOneCondition(enum comparisonType, T value1,T value2)
 {
     switch(comparisonType)
     {
@@ -145,4 +145,19 @@ void InsSearch::on_groupSearchButton_toggled(bool checked)
             groupSearch->hide();
         }
     }
+}
+
+void InsSearch::on_nameType_currentIndexChanged(int index)
+{
+    nameType = Search::getComparisonFromIndex(index);
+}
+
+void InsSearch::on_idType_currentIndexChanged(int index)
+{
+    idType = Search::getComparisonFromIndex(index);
+}
+
+void InsSearch::on_freqType_currentIndexChanged(int index)
+{
+    freqType = Search::getComparisonFromIndex(index);
 }

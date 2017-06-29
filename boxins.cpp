@@ -142,7 +142,6 @@ void BoxIns::change()
 {
     switch (type) {
     case 0:
-
         manager->setDrum(id,ui->freq->text().toInt(),
                             ui->nameEdit->text(),
                             ((Drum*)lastClass)->bpm,

@@ -15,7 +15,8 @@ private:
     ~Manager();
     Database *database;
 public:
-
+//    QVector<QString> searchInstruments(int index,int indexCompType, int averFreq, int averFreqCompType,
+//                                       QString name, int nameCompType, int classType);
     Instruments* getById(int id);
     Group* getByIdG(int id);
     QString getTypeName(int type);

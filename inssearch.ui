@@ -28,12 +28,12 @@
        <item>
         <widget class="QLineEdit" name="idEdit">
          <property name="text">
-          <string>=0</string>
+          <string>0</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_7">
+        <widget class="QComboBox" name="idType">
          <item>
           <property name="text">
            <string>Больше указанного</string>
@@ -133,12 +133,12 @@
        <item>
         <widget class="QLineEdit" name="freqEdit">
          <property name="text">
-          <string>=0</string>
+          <string>0</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_5">
+        <widget class="QComboBox" name="freqType">
          <item>
           <property name="text">
            <string>Больше указанного</string>
@@ -168,12 +168,12 @@
        <item>
         <widget class="QLineEdit" name="nameEdit">
          <property name="text">
-          <string>=0</string>
+          <string>Введите имя</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBox_6">
+        <widget class="QComboBox" name="nameType">
          <item>
           <property name="text">
            <string>Больше указанного</string>
