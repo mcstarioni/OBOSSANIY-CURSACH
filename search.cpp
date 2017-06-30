@@ -1,6 +1,7 @@
 #include "search.h"
 #include "ui_search.h"
 #include "groupsearch.h"
+#include "manager.h"
 Search::Search(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Search)
@@ -71,7 +72,42 @@ void Search::on_groupButton_toggled(bool checked)
 
 void Search::on_searchButton_clicked()
 {
+    QVector<QString>* result;
+    if(searchType == 0)
+    {
+        if(ins->hasGroupSearch)
+        {
+            result = Manager::getInstance()->searchInstruments(ins->id,
+                                      ins->freq,
+                                      ins->name,
+                                      ins->classes,
+                                      ins->groupSearch->id,
+                                      ins->groupSearch->name);
+        }
+        else
+        {
+            result = Manager::getInstance()->searchInstruments(ins->id,
+                                      ins->freq,
+                                      ins->name,
+                                      ins->classes);
+        }
+    }else
+    {
+        if(searchType == 1)
+        {
 
+        }else
+        {
+
+        }
+    }
+    if(result != 0)
+    {
+        for(int i = 0; i < result->size(); i++)
+        {
+            ui->listWidget->addItem(result->at(i));
+        }
+    }
 }
 
 void Search::on_pushButton_clicked()

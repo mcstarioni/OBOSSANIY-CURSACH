@@ -13,11 +13,6 @@ Manager::~Manager()
 {
 
 }
-//QVector<QString>* Manager::searchInstruments(int index, indexCompType, int averFreq, int averFreqCompType,
-//                                   QString name, int nameCompType, int classType)
-//{
-//
-//}
 
 Instruments* Manager::getById(int id)
 {
@@ -307,5 +302,64 @@ QString Manager::getTypeName(int type)
     return Instruments::getTypeName(type);
 }
 
+QVector<QString>* Manager::searchInstruments(SearchArgument<int>* id,
+                                             SearchArgument<int>* freq,
+                                             SearchArgument<QString>* name,
+                                             SearchArgument<int>* classes,
+                                             SearchArgument<int>* idGroup,
+                                             SearchArgument<QString>* nameGroup)
+{
+    QVector<QString>* result;
+    Instruments *temp;
+    for(int i = 0; i < database->vectorAll->size(); i++)
+    {
+        for(int j = 0; j < database->vectorAll->at(i)->size(); j++)
+        {
+            temp = database->vectorAll->at(i)->at(j);
+            bool fits = false;
+            if(checkIns(id,freq,name,classes,temp))
+            {
+                fits = true;
+                if(idGroup != 0 && nameGroup != 0)
+                {
+                    QVector<Group*>* groups = temp->getGroups();
+                    Group* tempGroup;
+                    fits = false;
+                    for(int j = 0; j < groups->size(); j++)
+                    {
+                        tempGroup = groups->at(i);
+                        if(checkGroup(idGroup,nameGroup,tempGroup))
+                        {
+                            fits = true;
+                            break;
+                        }
+                    }
+                }
+                if(fits)
+                {
+                    result->append(getStringInsRepresentation(temp));
+                }
+            }
+        }
+    }
+    return result;
+}
+bool Manager::checkIns(SearchArgument<int>* id,
+              SearchArgument<int>* freq,
+              SearchArgument<QString>* name,
+              SearchArgument<int>* classes,
+              Instruments* compared)
+{
+    return (id->compare(compared->Id()) && freq->compare(compared->getFrequency()) &&
+            name->compare(compared->getName()) && classes->compare(compared->Type()));
+}
 
-
+bool Manager::checkGroup(SearchArgument<int>* id,SearchArgument<QString>* name, Group* compared)
+{
+    return (id->compare(compared->Id()) && name->compare(compared->getName()));
+}
+QString Manager::getStringInsRepresentation(Instruments* ins)
+{
+    QString str = QString::number(ins->Id());
+    str = "Type: "+ins->getTypeName()+" id: " + str + ", name: " + ins->getName();
+}

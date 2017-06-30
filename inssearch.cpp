@@ -68,6 +68,7 @@ void InsSearch::on_groupSearchButton_toggled(bool checked)
             ui->groupAdd->addWidget(groupSearch);
             qDebug()<<"Ok2";
         }
+        hasGroupSearch = true;
         groupSearch->show();
     }
     else
@@ -75,6 +76,7 @@ void InsSearch::on_groupSearchButton_toggled(bool checked)
         qDebug()<<"toggled cancel";
         if(groupSearch != 0)
         {
+            hasGroupSearch = false;
             groupSearch->hide();
         }
     }

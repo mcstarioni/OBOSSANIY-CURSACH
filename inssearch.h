@@ -23,6 +23,7 @@ public:
     SearchArgument<int> *classes;
     GroupSearch* groupSearch;
     bool inputCorrect;
+    bool hasGroupSearch;
 private slots:
 
     void on_comboBox_currentIndexChanged(int index);

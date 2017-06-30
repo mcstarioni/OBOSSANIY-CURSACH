@@ -4,7 +4,7 @@
 #include <QString>
 #include "database.h"
 #include <QObject>
-
+#include "searchargument.h"
 class Manager: public QObject
 {
     Q_OBJECT
@@ -15,8 +15,21 @@ private:
     ~Manager();
     Database *database;
 public:
-//    QVector<QString> searchInstruments(int index,int indexCompType, int averFreq, int averFreqCompType,
-//                                       QString name, int nameCompType, int classType);
+    QVector<QString>* searchInstruments(SearchArgument<int>* id,
+                                        SearchArgument<int>* freq,
+                                        SearchArgument<QString>* name,
+                                        SearchArgument<int>* classes,
+                                        SearchArgument<int>* idGroup = 0,
+                                        SearchArgument<QString>* nameGroup = 0);
+    bool checkIns(SearchArgument<int>* id,
+                  SearchArgument<int>* freq,
+                  SearchArgument<QString>* name,
+                  SearchArgument<int>* classes,
+                  Instruments* compared);
+
+    bool checkGroup(SearchArgument<int>* id,SearchArgument<QString>* name, Group* compared);
+    QString getStringInsRepresentation(Instruments* ins);
+
     Instruments* getById(int id);
     Group* getByIdG(int id);
     QString getTypeName(int type);

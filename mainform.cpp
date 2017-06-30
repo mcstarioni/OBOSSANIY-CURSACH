@@ -68,6 +68,7 @@ void MainForm::on_inclusionB_clicked()
 
 void MainForm::on_addB_clicked()
 {
+    qDebug()<<"AB CLICKED";
     nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),addition);
 }
 
@@ -80,6 +81,7 @@ void MainForm::on_removeB_clicked()
 
 void MainForm::on_searchB_clicked()
 {
+    qDebug()<<"SB CLICKED";
     nextMenuButtonClicked(qobject_cast<QPushButton*>(sender()),search);
 }
 
@@ -266,12 +268,12 @@ void MainForm::showScrollAreas(bool show)
 
 void MainForm::nextMenuButtonClicked(QPushButton* nextMenuButton, QWidget *nextMenu)
 {
-    nextMenuButton->setChecked(true);
-    lastButton->setChecked(false);
-    lastButton = nextMenuButton;
     lastWidget->hide();
     lastWidget = nextMenu;
     lastWidget->show();
+    nextMenuButton->setChecked(true);
+    lastButton->setChecked(false);
+    lastButton = nextMenuButton;
 }
 
 void MainForm::clearToggledVectors()
