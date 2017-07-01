@@ -72,9 +72,11 @@ void Search::on_groupButton_toggled(bool checked)
 
 void Search::on_searchButton_clicked()
 {
-    QVector<QString>* result;
+    qDebug()<<"searchType = "<<searchType;
+    QVector<QString>* result = 0;
     if(searchType == 0)
     {
+        qDebug()<<"1";
         if(ins->hasGroupSearch)
         {
             result = Manager::getInstance()->searchInstruments(ins->id,
@@ -86,6 +88,7 @@ void Search::on_searchButton_clicked()
         }
         else
         {
+            qDebug()<<"2";
             result = Manager::getInstance()->searchInstruments(ins->id,
                                       ins->freq,
                                       ins->name,
@@ -103,9 +106,11 @@ void Search::on_searchButton_clicked()
     }
     if(result != 0)
     {
+        qDebug()<<"3";
         for(int i = 0; i < result->size(); i++)
         {
-            ui->listWidget->addItem(result->at(i));
+            QString temp = result->at(i);
+            ui->listWidget->addItem(temp);
         }
     }
 }

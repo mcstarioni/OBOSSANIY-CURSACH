@@ -309,8 +309,9 @@ QVector<QString>* Manager::searchInstruments(SearchArgument<int>* id,
                                              SearchArgument<int>* idGroup,
                                              SearchArgument<QString>* nameGroup)
 {
-    QVector<QString>* result;
+    QVector<QString>* result = new QVector<QString>();
     Instruments *temp;
+    qDebug()<<"1";
     for(int i = 0; i < database->vectorAll->size(); i++)
     {
         for(int j = 0; j < database->vectorAll->at(i)->size(); j++)
@@ -319,9 +320,11 @@ QVector<QString>* Manager::searchInstruments(SearchArgument<int>* id,
             bool fits = false;
             if(checkIns(id,freq,name,classes,temp))
             {
+                qDebug()<<"2";
                 fits = true;
                 if(idGroup != 0 && nameGroup != 0)
                 {
+                    qDebug()<<"3";
                     QVector<Group*>* groups = temp->getGroups();
                     Group* tempGroup;
                     fits = false;
@@ -335,13 +338,16 @@ QVector<QString>* Manager::searchInstruments(SearchArgument<int>* id,
                         }
                     }
                 }
+                qDebug()<<"4";
                 if(fits)
                 {
+                    qDebug()<<"fits";
                     result->append(getStringInsRepresentation(temp));
                 }
             }
         }
     }
+    qDebug()<<"5";
     return result;
 }
 bool Manager::checkIns(SearchArgument<int>* id,
@@ -362,4 +368,5 @@ QString Manager::getStringInsRepresentation(Instruments* ins)
 {
     QString str = QString::number(ins->Id());
     str = "Type: "+ins->getTypeName()+" id: " + str + ", name: " + ins->getName();
+    return str;
 }
